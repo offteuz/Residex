@@ -8,6 +8,7 @@ create table t_notificacao
 (
     id_notificacao        integer default seq_notificacao.nextval,
     descricao_notificacao varchar2(200),
+    data_coleta           date,
     id_morador            integer,
     id_recipiente         integer,
     primary key (id_notificacao),

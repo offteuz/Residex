@@ -1,13 +1,10 @@
 package br.com.fiap.residex.dto.cadastro;
 
-import br.com.fiap.residex.model.Capacidade;
-import br.com.fiap.residex.model.Coordenada;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 
-public record EmpresaCadastroDto(
+public record EmpresaCaminhaoDto(
 
         Long idEmpresa,
 
@@ -20,11 +17,6 @@ public record EmpresaCadastroDto(
                 max = 60
         )
         @NotBlank
-        String razaoSocial,
-
-        Capacidade capacidade,
-
-        @NotNull
-        Coordenada coordenada
+        String razaoSocial
 ) {
 }

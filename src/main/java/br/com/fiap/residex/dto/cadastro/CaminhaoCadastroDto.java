@@ -1,8 +1,9 @@
 package br.com.fiap.residex.dto.cadastro;
 
+import br.com.fiap.residex.model.Capacidade;
 import br.com.fiap.residex.model.Coordenada;
 import br.com.fiap.residex.model.Empresa;
-import br.com.fiap.residex.model.Status;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 
 public record CaminhaoCadastroDto(
@@ -15,10 +16,13 @@ public record CaminhaoCadastroDto(
         @NotBlank
         String placa,
 
+        @NotBlank
+        char emRota,
+
         Coordenada coordenada,
 
-        Status status,
+        Capacidade capacidade,
 
-        Empresa empresa
+        EmpresaCaminhaoDto empresa
 ) {
 }

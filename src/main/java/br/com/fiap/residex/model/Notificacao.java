@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,6 +30,9 @@ public class Notificacao {
 
     @Column(name = "descricao_notificacao")
     private String descricaoNotificacao;
+
+    @Column(name = "data_coleta")
+    private LocalDate dataColeta;
 
     @JoinColumn(
             name = "id_morador",

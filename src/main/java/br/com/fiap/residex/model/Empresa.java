@@ -35,6 +35,9 @@ public class Empresa {
     private String razaoSocial;
 
     @Embedded
+    private Capacidade capacidade;
+
+    @Embedded
     private Coordenada coordenada;
 
     @OneToMany(mappedBy = "empresa")

@@ -9,11 +9,12 @@ create table t_caminhao
     id_caminhao integer default seq_caminhao.nextval,
     modelo      varchar2(100),
     placa       varchar2(7) unique,
+    em_rota     char(1),
+    capacidade_maxima float,
+    capacidade_atual float,
     latitude    float,
     longitude   float,
-    id_status      integer,
-    id_empresa     integer,
+    id_empresa  integer,
     primary key (id_caminhao),
-    constraint fk_status foreign key (id_status) references t_status (ID_STATUS),
-    constraint fk_empresa foreign key (id_empresa) references t_empresa (ID_EMPRESA)
+    constraint fk_empresa_caminhao foreign key (id_empresa) references t_empresa (ID_EMPRESA)
 );

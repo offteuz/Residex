@@ -5,43 +5,41 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 @Component
-@Entity(name = "t_recipiente")
-public class Recipiente {
+@Entity(name = "t_item")
+public class Item {
 
     @Id
     @GeneratedValue(
-            generator = "seq_recipiente",
+            generator = "seq_item",
             strategy = GenerationType.SEQUENCE
     )
     @SequenceGenerator(
-            name = "seq_recipiente",
-            sequenceName = "seq_recipiente",
+            name = "seq_item",
+            sequenceName = "seq_item",
             allocationSize = 1
     )
-    @Column(name = "id_recipiente")
-    private Long idRecipiente;
+    @Column(name = "id_item")
+    private Long idItem;
 
-    @Embedded
-    private Capacidade capacidade;
+    @Column(name = "descricao_item")
+    private String descricaoItem;
 
-    @Embedded
-    private Coordenada coordenada;
+    @Column(name = "peso_item")
+    private Double pesoItem;
 
     @JoinColumn(
-            name = "id_morador",
-            referencedColumnName = "id_morador"
+            name = "id_recipiente",
+            referencedColumnName = "id_recipiente"
     )
     @ManyToOne
     @JsonIgnore
-    private Morador morador;
+    private Recipiente recipiente;
 
     @JoinColumn(
             name = "id_tipo",
@@ -50,7 +48,4 @@ public class Recipiente {
     @ManyToOne
     @JsonIgnore
     private Tipo tipo;
-
-    @OneToMany(mappedBy = "recipiente")
-    private List<Item> items;
 }

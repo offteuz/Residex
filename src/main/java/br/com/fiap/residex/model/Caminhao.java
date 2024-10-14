@@ -32,15 +32,14 @@ public class Caminhao {
 
     private String placa;
 
+    @Column(name = "em_rota")
+    private char emRota;
+
+    @Embedded
+    private Capacidade capacidade;
+
     @Embedded
     private Coordenada coordenada;
-
-    @JoinColumn(
-            name = "id_status",
-            referencedColumnName = "id_status"
-    )
-    @ManyToOne
-    private Status status;
 
     @JoinColumn(
             name = "id_empresa",

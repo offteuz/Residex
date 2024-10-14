@@ -26,9 +26,6 @@ public class CaminhaoService {
     private Recipiente recipiente;
 
     @Autowired
-    private Status status;
-
-    @Autowired
     private Notificacao notificacao;
 
     @Autowired
@@ -39,9 +36,6 @@ public class CaminhaoService {
 
     @Autowired
     private RecipienteRepository recipienteRepository;
-
-    @Autowired
-    private StatusRepository statusRepository;
 
     @Autowired
     private NotificacaoRepository notificacaoRepository;

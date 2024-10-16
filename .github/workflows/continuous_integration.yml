@@ -1,6 +1,7 @@
 on:
   push:
-    branches: "feature/main"
+    branches:
+      - master
 
 env:
   IMAGE_NAME: residex-java

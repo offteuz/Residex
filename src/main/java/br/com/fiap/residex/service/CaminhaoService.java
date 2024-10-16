@@ -20,21 +20,6 @@ import java.util.Optional;
 public class CaminhaoService {
 
     @Autowired
-    private Caminhao caminhao;
-
-    @Autowired
-    private Recipiente recipiente;
-
-    @Autowired
-    private Status status;
-
-    @Autowired
-    private Notificacao notificacao;
-
-    @Autowired
-    private Empresa empresa;
-
-    @Autowired
     private CaminhaoRepository caminhaoRepository;
 
     @Autowired
@@ -50,6 +35,8 @@ public class CaminhaoService {
     private EmpresaRepository empresaRepository;
 
     public CaminhaoExibicaoDto create(CaminhaoCadastroDto caminhaoCadastroDto) {
+
+        Caminhao caminhao = new Caminhao();
 
         Status status = statusRepository.findById(5L)
                 .orElseThrow(() -> new RuntimeException("Status não encontrado"));
@@ -82,33 +69,32 @@ public class CaminhaoService {
 
     public CaminhaoRastreioDto findById(Long idCaminhao) {
 
-        Optional<Caminhao> caminhaoOptional = caminhaoRepository.findById(idCaminhao);
+        // Busca o caminhão no repositório ou lança exceção se não for encontrado
+        Caminhao caminhao = caminhaoRepository.findById(idCaminhao)
+                .orElseThrow(CaminhaoNotFoundException::new);
 
-        if (caminhaoOptional.isPresent()) {
-            return new CaminhaoRastreioDto(caminhao);
-        } else {
-            throw new CaminhaoNotFoundException();
-        }
+        // Retorna o DTO de rastreamento com os dados do caminhão encontrado
+        return new CaminhaoRastreioDto(caminhao);
     }
 
     public CaminhaoExibicaoDto sairParaColeta(Long idRecipiente, Long idCaminhao) {
 
-        recipiente = recipienteRepository.findById(idRecipiente)
+        Recipiente recipiente = recipienteRepository.findById(idRecipiente)
                 .orElseThrow(() -> new RecipienteNotFoundException());
 
-        caminhao = caminhaoRepository.findById(idCaminhao)
+        Caminhao caminhao = caminhaoRepository.findById(idCaminhao)
                 .orElseThrow(() -> new CaminhaoNotFoundException());
 
-        status = statusRepository.findByDescricaoStatus("Em Operação");
+        Status status = statusRepository.findByDescricaoStatus("Em Operação");
 
-        if (recipiente.getCapacidadeAtual() >= recipiente.getCapacidadeMaxima() * 0.8
-                && !status.equals(caminhao.getStatus().getDescricaoStatus())) {
+        if (recipiente.getCapacidadeAtual() >= recipiente.getCapacidadeMaxima() * 0.8 &&
+                !status.equals(caminhao.getStatus())) {
 
             caminhao.setCoordenada(recipiente.getCoordenada());
             caminhao.setStatus(status);
-
             recipiente.setCapacidadeAtual(0);
 
+            Notificacao notificacao = new Notificacao();
             notificacao.setDescricaoNotificacao("Recipiente atingiu 80% da capacidade. Coleta realizada.");
             notificacao.setMorador(recipiente.getMorador());
             notificacao.setRecipiente(recipiente);
@@ -122,22 +108,23 @@ public class CaminhaoService {
 
     public CaminhaoExibicaoDto retornarColeta(Long idEmpresa, Long idCaminhao) {
 
-        empresa = empresaRepository.findById(idEmpresa)
-                .orElseThrow(() -> new EntityNotFoundException("Empresa não encontrado."));
+        Empresa empresa = empresaRepository.findById(idEmpresa)
+                .orElseThrow(() -> new EntityNotFoundException("Empresa não encontrada."));
 
-        caminhao = caminhaoRepository.findById(idCaminhao)
+        Caminhao caminhao = caminhaoRepository.findById(idCaminhao)
                 .orElseThrow(() -> new CaminhaoNotFoundException());
 
         if ("Em Operação".equals(caminhao.getStatus().getDescricaoStatus())) {
 
-            status = statusRepository.findByDescricaoStatus("Disponível");
-
+            Status status = statusRepository.findByDescricaoStatus("Disponível");
             caminhao.setCoordenada(empresa.getCoordenada());
             caminhao.setStatus(status);
 
             return new CaminhaoExibicaoDto(caminhaoRepository.save(caminhao));
         } else {
-            throw new RuntimeException("O caminhão não se encontra em operação. Atualmente ele se encontra com o status: " + caminhao.getStatus().getDescricaoStatus());
+            throw new RuntimeException(
+                    "O caminhão não se encontra em operação. Atualmente ele se encontra com o status: "
+                            + caminhao.getStatus().getDescricaoStatus());
         }
     }
 }

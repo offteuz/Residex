@@ -21,8 +21,10 @@ COPY --from=build /app/target/*.jar /app/app.jar
 # Define o diretório de trabalho
 WORKDIR /app
 
+ENV PROFILE=prd
+
 # Expondo a porta 8080 (a porta padrão do Spring Boot)
 EXPOSE 8080
 
 # Comando para rodar a aplicação
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-Dspring.profiles.active=${PROFILE}", "-jar", "app.jar"]

@@ -5,7 +5,7 @@ on:
 
 env:
   IMAGE_NAME: residex-java
-  AZURE_WEBAPP_NAME: residex-java
+  AZURE_WEBAPP_NAME: fiap-simple-dev
 
 jobs:
   build:
@@ -39,4 +39,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PROFILE  }}
-          images: "ghcr.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest"
+          images: "index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest"

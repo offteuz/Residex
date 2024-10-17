@@ -46,6 +46,7 @@ jobs:
             echo "SLOT_NAME=dev" >> $GITHUB_ENV
           else
             echo "SLOT_NAME=production" >> $GITHUB_ENV
+          fi
       - name: Show slot name
         run: echo "Deploy slot name $SLOT_NAME"
 

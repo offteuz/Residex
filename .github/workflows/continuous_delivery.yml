@@ -9,7 +9,7 @@ on:
 env:
   IMAGE_NAME: residex-java
   AZURE_WEBAPP_NAME_DEV: fiap-simple-dev
-  AZURE_WEBAPP_NAME_PRD: fiap-simple-prd
+  AZURE_WEBAPP_NAME_PRD: fiap-simple-prod
 
 jobs:
   build:

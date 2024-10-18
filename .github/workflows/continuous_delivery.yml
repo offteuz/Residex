@@ -41,7 +41,7 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}-latest
-          build-args:
+          build-args: |
             PROFILE: ${{ env.PROFILE }}
   deploy:
     runs-on: ubuntu-latest

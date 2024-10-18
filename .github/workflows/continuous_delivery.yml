@@ -2,7 +2,8 @@ name: Continuous Delivery
 
 on:
   push:
-    branches: "feature/main"
+    branches:
+      - develop
 
 env:
 IMAGE_NAME: residex-java

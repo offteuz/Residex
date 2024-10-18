@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - develop
+
+env:
+  IMAGE_NAME: residex-java
+  AZURE_WEBAPP_NAME: fiap-simple-dev
+
 jobs:
   build:
     runs-on: "ubuntu-latest"
@@ -21,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fiap-simple-dev-latest"
+          tags: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest"
           file: ./Dockerfile
   deploy:
     runs-on: ubuntu-latest
@@ -34,7 +39,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "fiap-simple-api-dev"
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: "develop"
           publish-profile: ${{ secrets.AZURE_PROFILE }}
-          images: "index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fiap-simple-dev-latest"
+          images: "index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest"

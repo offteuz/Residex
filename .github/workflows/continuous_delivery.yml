@@ -21,7 +21,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fiap-simple-dev:latest"
+          tags: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fiap-simple-dev-latest"
           file: ./Dockerfile
   deploy:
     runs-on: ubuntu-latest
@@ -37,4 +37,4 @@ jobs:
           app-name: "fiap-simple-api-dev"
           slot-name: "develop"
           publish-profile: ${{ secrets.AZURE_PROFILE }}
-          images: "index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fiap-simple-dev:latest"
+          images: "index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fiap-simple-dev-latest"

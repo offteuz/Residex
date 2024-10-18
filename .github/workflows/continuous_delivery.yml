@@ -65,5 +65,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.APP_NAME }}
-          publish-profile: ${{ secrets.PUBLISH_PROFILE }}
+          publish-profile: ${{ env.PUBLISH_PROFILE }}
           images: "index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest"

@@ -63,6 +63,11 @@ jobs:
             echo "PUBLISH_PROFILE=${{ secrets.AZURE_PROFILE }}" >> $GITHUB_ENV
           fi
 
+      - name: Debug Variables
+        run: |
+          echo "APP_NAME: ${{ env.APP_NAME }}"
+          echo "PUBLISH_PROFILE: ${{ env.PUBLISH_PROFILE }}"
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2

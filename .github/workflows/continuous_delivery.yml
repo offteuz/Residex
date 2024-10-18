@@ -2,12 +2,11 @@ name: Continuous Delivery
 
 on:
   push:
-    branches:
-      - develop
+    branches: develop
 
 env:
-IMAGE_NAME: residex-java
-AZURE_WEBAPP_NAME: fiap-simple-dev
+  IMAGE_NAME: residex-java
+  AZURE_WEBAPP_NAME: fiap-simple-dev
 
 jobs:
   build:

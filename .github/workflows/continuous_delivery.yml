@@ -54,7 +54,7 @@ jobs:
         run: |
           if [[ "${GITHUB_REF_NAME}" == "master" ]]; then
             echo "APP_NAME=${{ env.AZURE_WEBAPP_NAME_PRD }}" >> $GITHUB_ENV
-            echo "PUBLISH_PROFILE=${{ secrets.AZURE_PROFILE }}" >> $GITHUB_ENV
+            echo "PUBLISH_PROFILE=${{ secrets.AZURE_PROFILE_PRD }}" >> $GITHUB_ENV
           else
             echo "APP_NAME=${{ env.AZURE_WEBAPP_NAME_DEV }}" >> $GITHUB_ENV
             echo "PUBLISH_PROFILE=${{ secrets.AZURE_PROFILE }}" >> $GITHUB_ENV

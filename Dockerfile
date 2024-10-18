@@ -21,7 +21,7 @@ COPY --from=build /app/target/*.jar /app/app.jar
 # Define o diretório de trabalho
 WORKDIR /app
 
-ARG PROFILE=prd
+ARG PROFILE=dev
 ENV PROFILE={PROFILE}
 
 # Expondo a porta 8080 (a porta padrão do Spring Boot)

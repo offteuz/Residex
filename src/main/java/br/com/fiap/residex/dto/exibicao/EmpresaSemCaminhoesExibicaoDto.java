@@ -6,7 +6,7 @@ import br.com.fiap.residex.model.Empresa;
 
 import java.util.List;
 
-public record EmpresaExibicaoDto(
+public record EmpresaSemCaminhoesExibicaoDto(
 
         Long idEmpresa,
 
@@ -14,18 +14,15 @@ public record EmpresaExibicaoDto(
 
         String razaoSocial,
 
-        Coordenada coordenada,
-
-        List<Caminhao> caminhoes
+        Coordenada coordenada
 ) {
 
-    public EmpresaExibicaoDto(Empresa empresa) {
+    public EmpresaSemCaminhoesExibicaoDto(Empresa empresa) {
         this(
                 empresa.getIdEmpresa(),
                 empresa.getCnpj(),
                 empresa.getRazaoSocial(),
-                empresa.getCoordenada(),
-                empresa.getCaminhoes()
+                empresa.getCoordenada()
         );
     }
 }

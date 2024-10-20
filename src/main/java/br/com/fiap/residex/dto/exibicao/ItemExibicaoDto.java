@@ -2,7 +2,7 @@ package br.com.fiap.residex.dto.exibicao;
 
 import br.com.fiap.residex.model.Item;
 import br.com.fiap.residex.model.Tipo;
-import jakarta.validation.constraints.NotBlank;
+
 
 public record ItemExibicaoDto(
 

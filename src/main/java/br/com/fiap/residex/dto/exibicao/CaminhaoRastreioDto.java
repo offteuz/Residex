@@ -1,6 +1,7 @@
 package br.com.fiap.residex.dto.exibicao;
 
 import br.com.fiap.residex.model.Caminhao;
+import br.com.fiap.residex.model.Capacidade;
 import br.com.fiap.residex.model.Coordenada;
 
 public record CaminhaoRastreioDto(
@@ -9,14 +10,17 @@ public record CaminhaoRastreioDto(
 
         String placa,
 
-        Coordenada coordenada
+        Coordenada coordenada,
+
+        Capacidade capacidade
 ) {
 
     public CaminhaoRastreioDto(Caminhao caminhao) {
         this(
                 caminhao.getIdCaminhao(),
                 caminhao.getPlaca(),
-                caminhao.getCoordenada()
+                caminhao.getCoordenada(),
+                caminhao.getCapacidade()
         );
     }
 }

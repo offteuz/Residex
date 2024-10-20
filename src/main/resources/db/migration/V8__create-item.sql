@@ -1,12 +1,12 @@
 create sequence seq_item
-    nocycle
     nocache
+    nocycle
     start with 1
     increment by 1;
 
 create table t_item
 (
-    id_item        integer,
+    id_item        integer default seq_item.nextval,
     descricao_item varchar2(100),
     peso_item      float,
     id_recipiente  integer,

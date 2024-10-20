@@ -1,7 +1,6 @@
 package br.com.fiap.residex.controller;
 
 import br.com.fiap.residex.dto.cadastro.CaminhaoCadastroDto;
-import br.com.fiap.residex.dto.cadastro.CaminhaoColetaDto;
 import br.com.fiap.residex.dto.exibicao.CaminhaoExibicaoDto;
 import br.com.fiap.residex.dto.exibicao.CaminhaoRastreioDto;
 import br.com.fiap.residex.service.CaminhaoService;
@@ -32,12 +31,12 @@ public class CaminhaoController {
         return caminhaoService.findAll();
     }
 
-    @GetMapping("/caminhao/status/{status}")
-    @ResponseStatus(HttpStatus.OK)
-    private List<CaminhaoRastreioDto> findByStatus(
-            @PathVariable String status) {
-        return caminhaoService.findByStatus(status);
-    }
+//    @GetMapping("/caminhao/status/{status}")
+//    @ResponseStatus(HttpStatus.OK)
+//    private List<CaminhaoRastreioDto> findByStatus(
+//            @PathVariable String status) {
+//        return caminhaoService.findByStatus(status);
+//    }
 
     @GetMapping("/caminhao/id/{idCaminhao}")
     @ResponseStatus(HttpStatus.OK)

@@ -1,7 +1,6 @@
 package br.com.fiap.residex.service;
 
 import br.com.fiap.residex.dto.cadastro.CaminhaoCadastroDto;
-import br.com.fiap.residex.dto.cadastro.CaminhaoColetaDto;
 import br.com.fiap.residex.dto.exibicao.CaminhaoExibicaoDto;
 import br.com.fiap.residex.dto.exibicao.CaminhaoRastreioDto;
 import br.com.fiap.residex.exception.CaminhaoNotFoundException;
@@ -45,15 +44,10 @@ public class CaminhaoService {
 
     public CaminhaoExibicaoDto create(CaminhaoCadastroDto caminhaoCadastroDto) {
 
-        Status status = statusRepository.findById(5L)
-                .orElseThrow(() -> new RuntimeException("Status não encontrado"));
-
         Empresa empresa = empresaRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("Empresa não encontrada"));
 
         BeanUtils.copyProperties(caminhaoCadastroDto, caminhao);
-
-        caminhao.setStatus(status);
 
         caminhao.setCoordenada(empresa.getCoordenada());
 
@@ -69,10 +63,10 @@ public class CaminhaoService {
                 .toList();
     }
 
-    public List<CaminhaoRastreioDto> findByStatus(String status) {
-
-        return caminhaoRepository.findCaminhaoByStatus(status);
-    }
+//    public List<CaminhaoRastreioDto> findByStatus(String status) {
+//
+//        return caminhaoRepository.findCaminhaoByStatus(status);
+//    }
 
     public CaminhaoRastreioDto findById(Long idCaminhao) {
 
@@ -93,15 +87,11 @@ public class CaminhaoService {
         caminhao = caminhaoRepository.findById(idCaminhao)
                 .orElseThrow(() -> new CaminhaoNotFoundException());
 
-        status = statusRepository.findByDescricaoStatus("Em Operação");
-
-        if (recipiente.getCapacidadeAtual() >= recipiente.getCapacidadeMaxima() * 0.8
-                && !status.equals(caminhao.getStatus().getDescricaoStatus())) {
+        if (recipiente.getCapacidade().getCapacidadeAtual() >= recipiente.getCapacidade().getCapacidadeMaxima() * 0.8) {
 
             caminhao.setCoordenada(recipiente.getCoordenada());
-            caminhao.setStatus(status);
 
-            recipiente.setCapacidadeAtual(0);
+            recipiente.getCapacidade().setCapacidadeAtual(0);
 
             notificacao.setDescricaoNotificacao("Recipiente atingiu 80% da capacidade. Coleta realizada.");
             notificacao.setMorador(recipiente.getMorador());
@@ -122,16 +112,15 @@ public class CaminhaoService {
         caminhao = caminhaoRepository.findById(idCaminhao)
                 .orElseThrow(() -> new CaminhaoNotFoundException());
 
-        if ("Em Operação".equals(caminhao.getStatus().getDescricaoStatus())) {
+        if ("S".equals(caminhao.getEmRota())) {
 
-            status = statusRepository.findByDescricaoStatus("Disponível");
+            caminhao.setEmRota("N");
 
             caminhao.setCoordenada(empresa.getCoordenada());
-            caminhao.setStatus(status);
 
             return new CaminhaoExibicaoDto(caminhaoRepository.save(caminhao));
         } else {
-            throw new RuntimeException("O caminhão não se encontra em operação. Atualmente ele se encontra com o status: " + caminhao.getStatus().getDescricaoStatus());
+            throw new RuntimeException("O caminhão não se encontra em operação. Atualmente ele se encontra com o status: Em Rota!");
         }
     }
 }

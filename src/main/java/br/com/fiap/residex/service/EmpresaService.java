@@ -3,6 +3,7 @@ package br.com.fiap.residex.service;
 import br.com.fiap.residex.dto.cadastro.EmpresaCadastroDto;
 import br.com.fiap.residex.dto.cadastro.EmpresaUpdateDto;
 import br.com.fiap.residex.dto.exibicao.EmpresaExibicaoDto;
+import br.com.fiap.residex.dto.exibicao.EmpresaSemCaminhoesExibicaoDto;
 import br.com.fiap.residex.model.Empresa;
 import br.com.fiap.residex.repository.EmpresaRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,11 +22,11 @@ public class EmpresaService {
     @Autowired
     private EmpresaRepository empresaRepository;
 
-    public EmpresaExibicaoDto create(EmpresaCadastroDto empresaCadastroDto) {
+    public EmpresaSemCaminhoesExibicaoDto create(EmpresaCadastroDto empresaCadastroDto) {
 
         BeanUtils.copyProperties(empresaCadastroDto, empresa);
 
-        return new EmpresaExibicaoDto(empresaRepository.save(empresa));
+        return new EmpresaSemCaminhoesExibicaoDto(empresaRepository.save(empresa));
 
     }
 

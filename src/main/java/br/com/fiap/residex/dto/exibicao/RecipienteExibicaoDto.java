@@ -1,32 +1,32 @@
 package br.com.fiap.residex.dto.exibicao;
 
-import br.com.fiap.residex.model.Coordenada;
-import br.com.fiap.residex.model.Morador;
-import br.com.fiap.residex.model.Recipiente;
+import br.com.fiap.residex.model.*;
+
+import java.util.List;
 
 public record RecipienteExibicaoDto(
 
         Long idRecipiente,
 
-        String tipoResiduo,
+        Capacidade capacidade,
 
-        double capacidadeAtual,
-
-        double capacidadeMaxima,
+        Coordenada coordenada,
 
         Morador morador,
 
-        Coordenada coordenada
+        Tipo tipo,
+
+        List<Item> items
 ) {
 
     public RecipienteExibicaoDto(Recipiente recipiente) {
         this (
                 recipiente.getIdRecipiente(),
-                recipiente.getTipoResiduo(),
-                recipiente.getCapacidadeAtual(),
-                recipiente.getCapacidadeMaxima(),
+                recipiente.getCapacidade(),
+                recipiente.getCoordenada(),
                 recipiente.getMorador(),
-                recipiente.getCoordenada()
+                recipiente.getTipo(),
+                recipiente.getItems()
         );
     }
 }

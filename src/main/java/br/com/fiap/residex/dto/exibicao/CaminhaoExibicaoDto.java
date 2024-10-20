@@ -1,6 +1,8 @@
 package br.com.fiap.residex.dto.exibicao;
 
+import br.com.fiap.residex.dto.cadastro.EmpresaCaminhaoDto;
 import br.com.fiap.residex.model.Caminhao;
+import br.com.fiap.residex.model.Capacidade;
 import br.com.fiap.residex.model.Coordenada;
 
 public record CaminhaoExibicaoDto(
@@ -11,9 +13,13 @@ public record CaminhaoExibicaoDto(
 
         String placa,
 
+        String emRota,
+
         Coordenada coordenada,
 
-        EmpresaSemCaminhoesDto empresa
+        Capacidade capacidade,
+
+        EmpresaCaminhaoDto empresa
 ) {
 
     public CaminhaoExibicaoDto(Caminhao caminhao) {
@@ -21,8 +27,10 @@ public record CaminhaoExibicaoDto(
                 caminhao.getIdCaminhao(),
                 caminhao.getModelo(),
                 caminhao.getPlaca(),
+                caminhao.getEmRota(),
                 caminhao.getCoordenada(),
-                new EmpresaSemCaminhoesDto(caminhao.getEmpresa())
+                caminhao.getCapacidade(),
+                new EmpresaCaminhaoDto(caminhao.getEmpresa())
         );
     }
 }

@@ -2,7 +2,6 @@ package br.com.fiap.residex.dto.exibicao;
 
 import br.com.fiap.residex.model.Coordenada;
 import br.com.fiap.residex.model.Morador;
-import br.com.fiap.residex.model.Recipiente;
 
 import java.util.List;
 

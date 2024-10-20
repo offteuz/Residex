@@ -16,5 +16,5 @@ public class Capacidade {
     private double capacidadeMaxima;
 
     @Column(name = "capacidade_atual")
-    private double Atual;
+    private double capacidadeAtual;
 }

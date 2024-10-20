@@ -7,7 +7,6 @@ create sequence seq_recipiente
 create table t_recipiente
 (
     id_recipiente     integer default seq_recipiente.nextval,
-    tipo_residuo      varchar2(50),
     capacidade_maxima float,
     capacidade_atual  float,
     latitude          float,

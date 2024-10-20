@@ -23,16 +23,10 @@ public class RecipienteService {
     private Recipiente recipiente;
 
     @Autowired
-    private Caminhao caminhao;
-
-    @Autowired
     private Morador morador;
 
     @Autowired
     private RecipienteRepository recipienteRepository;
-
-    @Autowired
-    private CaminhaoRepository caminhaoRepository;
 
     @Autowired
     private MoradorRepository moradorRepository;

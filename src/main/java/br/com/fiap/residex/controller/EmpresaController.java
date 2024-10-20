@@ -3,6 +3,7 @@ package br.com.fiap.residex.controller;
 import br.com.fiap.residex.dto.cadastro.EmpresaCadastroDto;
 import br.com.fiap.residex.dto.cadastro.EmpresaUpdateDto;
 import br.com.fiap.residex.dto.exibicao.EmpresaExibicaoDto;
+import br.com.fiap.residex.dto.exibicao.EmpresaSemCaminhoesExibicaoDto;
 import br.com.fiap.residex.model.Empresa;
 import br.com.fiap.residex.service.EmpresaService;
 import jakarta.validation.Valid;
@@ -21,7 +22,7 @@ public class EmpresaController {
 
     @PostMapping("/empresa")
     @ResponseStatus(HttpStatus.CREATED)
-    private EmpresaExibicaoDto create(
+    private EmpresaSemCaminhoesExibicaoDto create(
             @RequestBody @Valid EmpresaCadastroDto empresaCadastroDto) {
         return empresaService.create(empresaCadastroDto);
     }

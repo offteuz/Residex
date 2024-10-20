@@ -33,7 +33,7 @@ public class Caminhao {
     private String placa;
 
     @Column(name = "em_rota")
-    private char emRota;
+    private String emRota;
 
     @Embedded
     private Capacidade capacidade;

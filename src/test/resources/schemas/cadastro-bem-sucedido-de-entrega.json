@@ -1,0 +1,74 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1730414788.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "idEmpresa",
+    "cnpj",
+    "razaoSocial",
+    "coordenada"
+  ],
+  "properties": {
+    "idEmpresa": {
+      "$id": "#root/idEmpresa",
+      "title": "Idempresa",
+      "type": "integer",
+      "examples": [
+        1
+      ],
+      "default": 0
+    },
+    "cnpj": {
+      "$id": "#root/cnpj",
+      "title": "Cnpj",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "68941449000198"
+      ],
+      "pattern": "^.*$"
+    },
+    "razaoSocial": {
+      "$id": "#root/razaoSocial",
+      "title": "Razaosocial",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "Residex Serviços Ambientais Ltda."
+      ],
+      "pattern": "^.*$"
+    },
+    "coordenada": {
+      "$id": "#root/coordenada",
+      "title": "Coordenada",
+      "type": "object",
+      "required": [
+        "latitude",
+        "longitude"
+      ],
+      "properties": {
+        "latitude": {
+          "$id": "#root/coordenada/latitude",
+          "title": "Latitude",
+          "type": "number",
+          "examples": [
+            21.18
+          ],
+          "default": 0.0
+        },
+        "longitude": {
+          "$id": "#root/coordenada/longitude",
+          "title": "Longitude",
+          "type": "number",
+          "examples": [
+            43.02
+          ],
+          "default": 0.0
+        }
+      }
+    }
+
+  }
+}
